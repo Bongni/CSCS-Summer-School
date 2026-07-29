@@ -1,19 +1,12 @@
 
 # CSCS-USI HPC/Data Analytics Summer School 2026
 
-This repository contains the materials used in the Summer School, including source code, lecture notes and slides.
-Material will be added to the repository throughout the course, which will require that students either update their copy of the repository, or download/checkout a new copy of the repository.
+This repository contains my solutions for the exercises of the Summer School.
 
-## Announcements
-
-We will be using Slack to post news and links relevant to the event: you should receive an invitation to join the Summer School Slack workspace at latest one week before the event.
+This is a fork from the official repository which contains the materials used in the Summer School, including source code, lecture notes and slides.
 
 ## Schedule
 
-### Group 1 - In-person
-<img width="846" height="426" alt="image" src="https://github.com/user-attachments/assets/db7fda0c-6688-4b96-a30d-d009b9b17491" />
-
-### Group 2 - Online
 <img width="847" height="367" alt="image" src="https://github.com/user-attachments/assets/632b73bd-8430-4c99-b520-92ddb232bc82" />
 
 ## Link to materials
