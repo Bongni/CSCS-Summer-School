@@ -31,8 +31,8 @@ main: $(OBJ) main.o
 
 unit_tests: data.o linalg.o unit_tests.o
 	LIBRARY_PATH=${LD_LIBRARY_PATH} g++ $(GCC_FLAGS) $(LINK_FLAGS) unit_tests.o $(OBJ) -o unit_tests -lcudart -lcublas
-#	./unit_tests                       # run with interactive session
-	srun -Cgpu ./unit_tests                 # run without interactive session
+	./unit_tests                       # run with interactive session
+#	srun -Cgpu ./unit_tests                 # run without interactive session
 
 clean:
 	rm -f main
