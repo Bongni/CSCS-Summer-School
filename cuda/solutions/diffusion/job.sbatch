@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#SBATCH --job-name="diffusion_mpi"
+#SBATCH --ntasks=1            # total number of GPUs
+#SBATCH --ntasks-per-node=1   # 1 MPI ranks per node
+#SBATCH --account=summerschool-course2026-cscs
+#SBATCH --reservation=ss2026
+#SBATCH --hint=nomultithread  
+#SBATCH --uenv=prgenv-gnu/26.3:v1
+#SBATCH --view=default
+#SBATCH --gpus-per-task=1
+
+export MPICH_GPU_SUPPORT_ENABLED=1
+export FI_CXI_RX_MATCH_MODE=software
+export MPICH_RDMA_ENABLED_CUDA=1
+
+srun ./mps-wrapper.sh /MY/PATH/TO/EXAMPLES/practicals/diffusion/diffusion2d_mpi 25 10000
