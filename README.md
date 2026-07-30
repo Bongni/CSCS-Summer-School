@@ -67,6 +67,19 @@ git pull origin main
 There is a posibility that you might have a conflict between your working version of the repository and the origin.
 In this case you can ask one of the assistants for help.
 
+## Setup on Daint@Alps
+
+```
+uenv image pull prgenv-gnu/26.3:v1
+uenv start --view=default prgenv-gnu/26.3:v1
+```
+
+## Running on Daint@Alps
+
+```
+srun -N 1 -A summerschool-course2026-cscs --reservation=ss2026 -t60 ./exec args
+```
+
 # How to access Daint@Alps
 
 This will be covered in the lectures and you can find more details in the [CSCS User Documentation](https://docs.cscs.ch/clusters/daint/#daint).
