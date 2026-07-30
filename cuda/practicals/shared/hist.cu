@@ -5,14 +5,25 @@
 
 #include "util.hpp"
 
-__global__
-void histogram(int* x, int* bins, int n) {
+
+
+// ======================================================
+//              Start own code
+// ======================================================
+
+__global__ void histogram(int* x, int* bins, int n) {
     auto i = threadIdx.x + blockIdx.x*blockDim.x;
+
     if (i<n) {
         const auto c = x[i];
-        bins[c]++;
+
+        atomicAdd(&bins[c], 1);
     }
 }
+
+// ======================================================
+//              End own code
+// ======================================================
 
 int main(void) {
     const int n = 1024;

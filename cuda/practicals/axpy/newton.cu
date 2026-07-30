@@ -28,10 +28,15 @@ void newton_host(int n, double *x) {
     }
 }
 
-// TODO : implement newton_device() kernel that performs the work in newton_host
-//        in parallel on the GPU
-__global__
-void newton_device(int n, double *x) {
+// ======================================================
+//              Start own code
+// ======================================================
+
+/**
+ * @brief Implement newton_device() kernel that performs the work in newton_host
+ *        in parallel on the GPU
+ */
+__global__ void newton_device(int n, double *x) {
     int i = threadIdx.x + blockIdx.x * blockDim.x;
 
     if(i < n) {
@@ -44,6 +49,10 @@ void newton_device(int n, double *x) {
         x[i] = x0;
     }
 }
+
+// ======================================================
+//              End own code
+// ======================================================
 
 int main(int argc, char** argv) {
     size_t pow        = read_arg(argc, argv, 1, 20);
@@ -71,7 +80,15 @@ int main(int argc, char** argv) {
     cudaDeviceSynchronize();
     auto time_kernel = -get_time();
 
+    // ======================================================
+    //              Start own code
+    // ======================================================
+
     newton_device<<<grid_dim, block_dim>>>(n, xd);
+
+    // ======================================================
+    //              End own code
+    // ======================================================
 
     cudaDeviceSynchronize();
     time_kernel += get_time();

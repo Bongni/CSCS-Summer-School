@@ -13,15 +13,82 @@ double dot_host(const double *x, const double* y, int n) {
     return sum;
 }
 
-// TODO implement dot product kernel
-template <int THREADS>
-__global__
-void dot_gpu_kernel(const double *x, const double* y, double *result, int n) {
+
+
+// ======================================================
+//              Start own code
+// ======================================================
+
+/**
+ * @brief Compute ceil(log2(x))
+ * 
+ */
+__device__ __forceinline__ int ilog2(unsigned int x) {
+    return (x <= 1) ? 0 : 32 - __clz(x - 1);
 }
+
+/**
+ * @brief Dot product kernel
+ * 
+ */
+template <int THREADS> __global__ void dot_gpu_kernel(
+    const double *x, const double* y, double *result, int n
+) {
+    __shared__ double buffer[1024];
+
+    // Compute idx
+    int i = threadIdx.x + blockIdx.x * blockDim.x;
+
+    // Compute products
+    if(i < n) {
+        buffer[i] = x[i] * y[i];
+    } else {
+        buffer[i] = 0;
+    }
+
+    // Wait for entire buffer to be written
+    __syncthreads();
+
+    // Compute the sum
+    int log_n = ilog2(n);
+    int iters = log_n - ilog2(i + 1);
+
+    for(int j = 0; j < log_n; j++) {
+        if(j < iters) {
+            buffer[i] += buffer[i + (1 << (log_n - j - 1))];
+        }
+
+        __syncthreads();
+    }
+
+    // Thread zero writes the result
+    if(i == 0) {
+        *result = buffer[0];
+    }
+}
+
+// ======================================================
+//              End own code
+// ======================================================
+
+
 
 double dot_gpu(const double *x, const double* y, int n) {
     static double* result = malloc_managed<double>(1);
+
+    // ======================================================
+    //              Start own code
+    // ======================================================
+
     // TODO call dot product kernel
+    constexpr int block_size = 1024;
+    int num_blocks = (n + block_size - 1) / block_size;
+
+    dot_gpu_kernel<block_size><<<num_blocks, block_size>>>(x, y, result, n);
+
+    // ======================================================
+    //              End own code
+    // ======================================================
 
     cudaDeviceSynchronize();
     return *result;

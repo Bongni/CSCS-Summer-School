@@ -55,7 +55,7 @@ cd $SCRATCH
 git clone https://github.com/eth-cscs/SummerSchool.git
 ```
 
-## Updating the repository
+### Updating the repository
 
 Lecture slides and source code will be regurlarly updated on the remote git repository throughout the course.
 To update your local repository you can simply go inside the path and type
@@ -80,6 +80,26 @@ uenv start --view=default prgenv-gnu/26.3:v1
 srun -N 1 -A summerschool-course2026-cscs --reservation=ss2026 -t60 ./exec args
 ```
 
-# How to access Daint@Alps
+## My contribution
+
+My own code is highlighted with the following opening and closing comments
+
+```
+...
+
+// ======================================================
+//              Start own code
+// ======================================================
+
+...
+
+// ======================================================
+//              End own code
+// ======================================================
+
+...
+```
+
+## How to access Daint@Alps
 
 This will be covered in the lectures and you can find more details in the [CSCS User Documentation](https://docs.cscs.ch/clusters/daint/#daint).

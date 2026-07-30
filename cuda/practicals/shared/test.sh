@@ -3,7 +3,7 @@ do
     echo "... method $method"
     for n in `seq 10 2 26`
     do
-        srun ./blur $n 200 $method | grep seconds
+        srun -A summerschool-course2026-cscs ./blur $n 200 $method | grep seconds
     done
     echo
 done
