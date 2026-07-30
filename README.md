@@ -25,7 +25,7 @@ You will want to download the repository to your laptop to get all of the slides
 The best method is to use git, so that you can update the repository as more slides and material are added over the course of the event.
 So, if you have git installed, use the same method as for Piz Daint below (in a directory of your choosing).
 
-You can also download the code as a zip file by clicking on the "<> Code" (  <img width="121" height="39" alt="image" src="https://github.com/user-attachments/assets/0a55224e-5ac9-4027-80be-22066a86073f" /> ) button on the top right hand side of the github page, then clicking on __Download zip__.
+You can also download the code as a zip file by clicking on the "<> Code" button on the top right hand side of the github page, then clicking on __Download zip__.
 
 ### On Daint@Alps via JupyterLab
 
