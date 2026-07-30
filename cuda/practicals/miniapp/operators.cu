@@ -303,7 +303,7 @@ void diffusion(data::Field const& U, data::Field &S)
     >>>(S.device_data(), U.device_data());
 
     // ======================================================
-    //              Start own code
+    //              End own code
     // ======================================================
 
     cudaDeviceSynchronize();    // TODO: remove after debugging

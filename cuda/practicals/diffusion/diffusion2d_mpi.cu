@@ -127,7 +127,30 @@ int main(int argc, char** argv) {
         // x0(:, ny-1) <- north
         // x0(:, ny-2) -> north
         if (use_rdma) {
-            // TODO: fill in g2g communication
+            // ======================================================
+            //              Start own code
+            // ======================================================
+
+            // g2g communication
+            if (mpi_rank>0) {
+                 MPI_Sendrecv(x0+nx, nx, MPI_DOUBLE,
+                            mpi_rank-1, 0,
+                            x0, nx, MPI_DOUBLE,
+                            mpi_rank-1, 1,
+                            MPI_COMM_WORLD, &status_south);
+            }
+            
+            if (mpi_rank<mpi_size-1) {
+                 MPI_Sendrecv(x0+(ny-2)*nx, nx, MPI_DOUBLE,
+                            mpi_rank+1, 1,
+                            x0+(ny-1)*nx, nx, MPI_DOUBLE,
+                            mpi_rank+1, 0,
+                            MPI_COMM_WORLD, &status_north);
+            }
+
+            // ======================================================
+            //              End own code
+            // ======================================================
         }
         else {
             if (mpi_rank>0) {
